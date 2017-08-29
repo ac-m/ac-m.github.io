@@ -14,7 +14,7 @@ Jekyll-now是一套预定义好博客样式的文件结构，且支持Jekyll没�
 
 1. 到<https://github.com/>注册帐号，登录你的github帐号。
 
-1. Fork(即复制)Jekyll-now博客系统所有文件。具体操作可看<https://github.com/barryclark/jekyll-now>说明，一般操作如下：
+1. Fork(即复制)Jekyll-now博客系统所有文件。详细操作可看<https://github.com/barryclark/jekyll-now>说明，简单操作如下：
 
     1. 到<https://github.com/barryclark/jekyll-now>，点右上角"Fork"按钮。
     
