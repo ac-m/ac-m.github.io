@@ -18,12 +18,12 @@ title: 如何用Jekyll-now写博客
 1. 到<https://github.com/ac-m/ac-m.github.io/tree/master/_posts>，点"Create new file"按钮。
 2. 文件名为2017-8-30-xxx.md格式，前面是日期，后面xxx为任意，文件名为.md。
 3. 编辑文件内容，开头为
+
 ```
 ---
 layout: post
 title: 如何用Jekyll-now写博客
 ---
-
 ```
 
 {{ site.time }}
