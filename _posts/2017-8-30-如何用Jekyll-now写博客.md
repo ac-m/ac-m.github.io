@@ -10,9 +10,10 @@ title: 如何用Jekyll-now写博客
     1. 到<https://github.com/barryclark/jekyll-now>，点右上角的"Fork"按钮。
     1. 点右边"Settings"按钮，修改"Repository name"为"xxx.github.io"形式，其中"xxx"替换为你github注册名。
     1. 用浏览器看"xxx.github.io"，你的博客已准备好。
-    动态图![an image alt text]({{ site.baseurl }}/blob/master/images/step1.gif "an image title")
+    1. 动态图 ![an image alt text](/blob/master/images/step1.gif "an image title")
+    
     <https://github.com/ac-m/ac-m.github.io/blob/master/images/step1.gif>
-        
+        {{ site.baseurl }}
         
 ## 写博客(需把下面的ac-m替换为你github帐号)
 
