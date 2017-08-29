@@ -16,8 +16,8 @@ title: 如何用Jekyll-now写博客
 ## 写博客(需把下面的ac-m替换为你github帐号)
 
 1. 到<https://github.com/ac-m/ac-m.github.io/tree/master/_posts>，点"Create new file"按钮。
-2. 文件名为2017-8-30-xxx.md格式，前面是日期，后面xxx为任意，文件名为.md。
-3. 编辑文件内容，开头为
+1. 文件名为2017-8-30-xxx.md格式，前面是日期，后面xxx为任意，文件名为.md。
+1. 编辑开头为如下形式
 
 ```
 ---
@@ -26,4 +26,8 @@ title: 如何用Jekyll-now写博客
 ---
 ```
 
-{{ site.time }}
+1. 用Markdown语法编辑文件内容，Markdown效果请看<http://www.jekyllnow.com/Markdown-Style-Guide/>
+1. Markdown效果对应原文请参考<https://raw.githubusercontent.com/barryclark/www.jekyllnow.com/gh-pages/_posts/2014-6-19-Markdown-Style-Guide.md>
+1. Jekyll变量请参考<http://jekyllrb.com/docs/variables/>
+1. 编辑结束请按"Commit changes"按钮。
+1. 调试页面时判断页面是否刷新可用Jekyll变量site.time {{ site.time }} 。
