@@ -17,3 +17,5 @@ title: 如何用Jekyll-now写博客
 ## 写博客(需把下面的ac-m替换为你github帐号)
 
     1.待续
+
+{{ site.time }}
