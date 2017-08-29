@@ -7,7 +7,7 @@ title: 如何用Jekyll-now写博客
 
 Github pages可用于写博客，它基于用Ruby语言开发的静态页面自动生成系统Jekyll。  
 用户自定义博客样式文件结构，每次书写Jekyll格式文件，几分钟后，Github后台自动生成对应静态页面。  
-Jekyll-now是一套预定义好博客样式的文件结构，且加入Jekyll没有的评论模块及流量分析模块。  
+Jekyll-now是一套预定义好博客样式的文件结构，且支持Jekyll没有的评论模块及流量分析模块。  
 
 
 ## 准备工作
