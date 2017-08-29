@@ -10,7 +10,7 @@ Github pages可用于写博客，它基于用Ruby语言开发的静态页面自�
 Jekyll-now是一套预定义好博客样式的文件结构，且支持Jekyll没有的评论模块及流量分析模块。  
 
 
-## 准备工作
+## 准备工作(需把下面的ac-m替换为你github帐号)
 
 1. 到<https://github.com/>注册帐号，登录你的github帐号。
 
@@ -18,9 +18,9 @@ Jekyll-now是一套预定义好博客样式的文件结构，且支持Jekyll没�
 
     1. 到<https://github.com/barryclark/jekyll-now>，点右上角"Fork"按钮。
     
-    1. 点右边"Settings"按钮，修改"Repository name"为"ac-m.github.io"形式，其中"ac-m"替换为你github注册名。
+    1. 点右边"Settings"按钮，修改"Repository name"为"ac-m.github.io"。
     
-    1. 用浏览器看"ac-m.github.io"，"ac-m"替换为你github注册名，你博客已准备好。
+    1. 用浏览器看"ac-m.github.io"，你博客已准备好。
 
     动态图 ![an image alt text](/images/step1.gif "an image title")
 
