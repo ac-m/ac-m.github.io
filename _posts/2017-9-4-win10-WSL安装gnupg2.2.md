@@ -1,7 +1,7 @@
 ---
- layout: post
- title: win10 WSL安装GnuPG2.2
- ---
+layout: post
+title: win10 WSL安装GnuPG2.2
+---
  
  ## 当前系统
  
