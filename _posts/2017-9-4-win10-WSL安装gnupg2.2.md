@@ -52,11 +52,11 @@ gpg --recv-keys 4F25E3B6 33BD3F06
 ## 验证签名
 验证时如显示"完好的签名，来自于"，表示签名正常。  
 ```bash
+gpg --verify npth-1.5.tar.bz2.sig
 gpg --verify libgpg-error-1.27.tar.bz2.sig
 gpg --verify libgcrypt-1.8.1.tar.bz2.sig
 gpg --verify libksba-1.3.5.tar.bz2.sig
 gpg --verify libassuan-2.4.3.tar.bz2.sig
-gpg --verify npth-1.5.tar.bz2.sig
 gpg --verify pinentry-1.0.0.tar.bz2.sig
 gpg --verify gnupg-2.2.0.tar.bz2.sig
 ```
