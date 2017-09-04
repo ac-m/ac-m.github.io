@@ -11,7 +11,12 @@ WSL(Windows Subsystem for Linux)版本，可用sudo lsb_release -a查看，当�
 
 ## 安装依赖
 ```bash
-apt install build-essential libncurses5-dev
+apt install libgnutls-dev bzip2 make gettext texinfo gnutls-bin build-essential libbz2-dev zlib1g-dev libncurses5-dev libsqlite3-dev libldap2-dev
+```
+
+## 新建临时目录
+```bash
+mkdir gnugp2.2 && cd gnugp2.2
 ```
 
 ## 下载源码及签名
@@ -40,6 +45,7 @@ curl -O https://gnupg.org/ftp/gcrypt/gnupg/gnupg-2.2.0.tar.bz2.sig
 
 ## 安装公钥
 ```bash
+gpg --list-keys
 gpg --recv-keys 4F25E3B6 33BD3F06
 ```
 
@@ -50,20 +56,30 @@ gpg --verify libgpg-error-1.27.tar.bz2.sig
 gpg --verify libgcrypt-1.8.1.tar.bz2.sig
 gpg --verify libksba-1.3.5.tar.bz2.sig
 gpg --verify libassuan-2.4.3.tar.bz2.sig
-
+gpg --verify npth-1.5.tar.bz2.sig
+gpg --verify pinentry-1.0.0.tar.bz2.sig
+gpg --verify gnupg-2.2.0.tar.bz2.sig
 ```
 
 ## 设置lib路径
-echo "/usr/local/lib" > /etc/ld.so.conf.d/gpg2.conf
+```bash
+echo "/usr/local/lib" > /etc/ld.so.conf.d/gpg2.2.conf
+```
+
+## 安装nPth
+```bash
+tar -xjf npth-1.5.tar.bz2
+cd npth-1.5/
+./configure && make && make install
+cd .. && ldconfig
+```
 
 ## 安装Libgpg-error
 ```bash
 tar -xjf libgpg-error-1.27.tar.bz2
 cd libgpg-error-1.27/
-./configure
-make
-make install
-cd ..
+./configure && make && make install
+cd .. && ldconfig
 ```
 
 ## 安装Libgcrypt
@@ -74,7 +90,7 @@ cd libgcrypt-1.8.1/
 ldconfig -v
 make check
 make install
-cd ..
+cd .. && ldconfig
 ```
 
 ## 安装Libksba
@@ -82,7 +98,7 @@ cd ..
 tar -xjf libksba-1.3.5.tar.bz2
 cd libksba-1.3.5/
 ./configure && make && make install
-cd ..
+cd .. && ldconfig
 ```
 
 ## 安装Libassuan
@@ -90,14 +106,7 @@ cd ..
 tar -xjf libassuan-2.4.3.tar.bz2
 cd libassuan-2.4.3/
 ./configure && make && make install
-cd ..
-```
-
-## 安装nPth
-```bash
-tar -xjf npth-1.5.tar.bz2
-cd npth-1.5/
-cd ..
+cd .. && ldconfig
 ```
 
 ## 安装Pinentry
@@ -106,11 +115,17 @@ tar -xjf pinentry-1.0.0.tar.bz2
 cd pinentry-1.0.0/
 ./configure --enable-pinentry-curses
 make && make install
-cd ..
+cd .. && ldconfig
 ```
 
 ## 安装GnuPG
 ```bash
-
+tar -xjf gnupg-2.2.0.tar.bz2
+cd gnupg-2.2.0/
+./configure
+make
+make check
+make install
+cd .. && ldconfig -v
 ```
 
