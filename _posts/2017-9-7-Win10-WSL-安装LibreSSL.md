@@ -22,11 +22,11 @@ sudo make install  # set DESTDIR= to install to an alternate location
 
 ## LibreSSL与OpenSSL共存
 
-LibreSSL默认安装到/usr/local目录下，OpenSSL在/usr目录下。
-执行程序，LibreSSL在/usr/local/bin，OpenSSL在/usr/bin。
-库，LibreSSL在/usr/local/lib，OpenSSL在/usr/lib。
+LibreSSL默认安装到/usr/local目录下，OpenSSL在/usr目录下。  
+执行程序，LibreSSL在/usr/local/bin，OpenSSL在/usr/bin。  
+库，LibreSSL在/usr/local/lib，OpenSSL在/usr/lib。  
 
-配置文件，LibreSSL在/usr/local/etc，OpenSSL在/etc。
+配置文件，LibreSSL在/usr/local/etc，OpenSSL在/etc。  
 
 当前路径设置，显示openssl使用的是LibreSSL还是OpenSSL
 ```bash
