@@ -32,12 +32,12 @@ Jekyll-now是一套预定义好博客样式的文件结构。  
 此文件为Jekyll格式文件，由特殊格式文件头，加上后面的Markdown格式内容构成。
 
 1. 编辑文件头为如下形式
-    ```
-    ---
-    layout: post
-    title: 如何用Jekyll-now写博客
-    ---
-    ```
+```
+---
+layout: post
+title: 如何用Jekyll-now写博客
+---
+```
 
 1. 用Markdown语法编辑文件内容，Markdown效果请看<http://www.jekyllnow.com/Markdown-Style-Guide/>
 
