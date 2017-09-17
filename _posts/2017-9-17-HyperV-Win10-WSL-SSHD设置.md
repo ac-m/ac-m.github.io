@@ -74,15 +74,13 @@ chmod go-rwx ~/.ssh/authorized_keys
 
 ## WSL服务器sshd_config设置
 
-先修改成如下
+先修改如下值
 ```bash
 HostKey /etc/ssh/ssh_host_ed25519_key
 HostCertificate /etc/ssh/ssh_host_ed25519_key-cert.pub
 HostKeyAlgorithms ssh-ed25519
 KexAlgorithms curve25519-sha256@libssh.org
 PubkeyAcceptedKeyTypes ssh-ed25519-cert-v01@openssh.com
-#PasswordAuthentication no
-#ChallengeResponseAuthentication no
 ```
 
 重启sshd
@@ -96,5 +94,10 @@ ssh userA@wsl_server_host
 ```
 如不需输入密码，则证书认证方式登录成功。
 
+再修改sshd_config如下值
+```bash
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+```
 
-
+重启sshd，从另一主机测试登录。
