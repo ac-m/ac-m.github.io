@@ -97,7 +97,6 @@ ssh userA@wsl_server_host
 再修改sshd_config如下值
 ```bash
 PasswordAuthentication no
-ChallengeResponseAuthentication no
 ```
 
 重启sshd，从另一主机测试登录。
