@@ -45,7 +45,7 @@ sudo service ssh start
 
 ## WSL服务器主机公钥签名
 
-复制服务器主机公钥到CA主机，签名得到证书，复制服务器证书及CA公钥回服务器。
+复制服务器主机公钥到CA主机，签名得到证书，复制服务器证书及CA公钥回服务器。  
 以下在CA主机上操作。
 ```bash
 scp userA@wsl_server_host:/etc/ssh/ssh_host_ed25519_key.pub ~/ssh_ca/
