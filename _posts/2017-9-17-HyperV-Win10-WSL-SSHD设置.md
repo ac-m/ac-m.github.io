@@ -19,7 +19,7 @@ title: HyperV Win10 WSL SSHD 设置
 ## WSL生成主机密钥
 
 ```bash
-sudo ssh-keygen -A
+sudo ssh-keygen -t ed25519 -N "" -C "ed25519 server host key" -f /etc/ssh/ssh_host_ed25519_key
 ```
 
 ## WSL修改sshd_config
