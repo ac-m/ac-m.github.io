@@ -13,7 +13,7 @@ title: HyperV Win10 WSL SSHD 设置
 
 ## 修改HyperV的Win10的防火墙
 
-放行tcp进入端口22
+放行tcp进入端口2222
 
 
 ## WSL生成主机密钥
