@@ -26,8 +26,9 @@ sudo ssh-keygen -t ed25519 -N "" -C "ed25519 server host key" -f /etc/ssh/ssh_ho
 
 ```bash
 PasswordAuthentication yes
+Port 2222
 ```
-
+修改sshd端口以免与Microsoft SSH Server for Windows端口冲突。
 
 ## WSL启动密码验证的sshd
 
