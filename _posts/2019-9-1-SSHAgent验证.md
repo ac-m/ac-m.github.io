@@ -16,8 +16,9 @@ ssh-keygen -Us agent_key.pub -I "servername ed25519 host certificate" -h /etc/ss
 第5行，生成私钥/etc/ssh/ssh_host_ed25519_key、公钥/etc/ssh/ssh_host_ed25519_key.pub  
 第6行，用客户端的SSH Agent(USB Key)私钥签名公钥ssh_host_ed25519_key.pub得到证书ssh_host_ed25519_key-cert.pub，  
 其中-h表示这是主机证书而非用户证书，  
-其中-V "+52w1d"表示有效期为52周(week)1天(day)，也可用日期表示，如"20190901"、具体到秒"20190901033400"。
-也可用-n principals指定主机名，客户端用ssh -o HostKeyAlias=principal方式验证服务器。
+其中-V "+52w1d"表示有效期为52周(week)1天(day)，也可用日期表示，如"20190901"、具体到秒"20190901033400"，  
+也可用-n principals指定主机名，客户端用ssh -o HostKeyAlias=principal方式验证服务器。  
+
 
 ## 设置服务器/etc/ssh/sshd_config
 ```bash
