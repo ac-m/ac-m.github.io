@@ -3,10 +3,20 @@ layout: post
 title: SSH Agent(USB Key)验证
 ---
 
-## 生成服务器主机证书
+## 客户端准备SSH Agent(USB Key)公钥  
+
+用gpg -K列出私钥对应公钥指纹fingerpring。  
+
+用gpg --export-ssh-key fingerpring >> agent_key.pub得到SSH公钥文件。  
+
+
+## 生成服务器主机证书  
+
+把SSH Agent(USB Key)公钥复制到服务器agent_key.pub  
+
+如在Windows上使用USBKey，设置Klopatra，打勾“设置|配置|GnuPG系统|Private Keys|Do not use the PIN cache when signing”。  
+
 ```bash
-#把SSH Agent(USB Key)公钥复制到服务器agent_key.pub
-#如在Windows上使用USBKey，设置Klopatra，打勾“设置|配置|GnuPG系统|Private Keys|Do not use the PIN cache when signing”。
 #用Forward Agent方式登录Server
 ssh -A user@server
 sudo ssh-keygen -t ed25519 -N "" -C "ed25519 server host key" -f /etc/ssh/ssh_host_ed25519_key
