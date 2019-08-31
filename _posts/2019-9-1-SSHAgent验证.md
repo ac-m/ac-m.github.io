@@ -14,10 +14,15 @@ ssh-keygen -Us agent_key.pub -I "servername ed25519 host certificate" -h /etc/ss
 #得到ssh_host_ed25519_key-cert.pub
 ```
 第5行，生成私钥/etc/ssh/ssh_host_ed25519_key、公钥/etc/ssh/ssh_host_ed25519_key.pub  
+
 第6行，用客户端的SSH Agent(USB Key)私钥签名公钥ssh_host_ed25519_key.pub得到证书ssh_host_ed25519_key-cert.pub，  
+
 其中-h表示这是主机证书而非用户证书，  
+
 其中-V "+52w1d"表示有效期为52周(week)1天(day)，也可用日期表示，如"20190901"、具体到秒"20190901033400"，  
+
 也可用-n principals指定主机名，客户端用ssh -o HostKeyAlias=principal方式验证服务器。  
+
 
 
 ## 设置服务器/etc/ssh/sshd_config
@@ -71,9 +76,12 @@ echo "cert-authority,principals=user1 $(cat ca_key.pub)" >>~/.ssh/authorized_key
 ```
 
 ## 设置客户端~/.ssh/known_hosts
-文件每行用空白间隔的字段为markers (optional), hostnames, keytype, base64-encoded key, comment。
-验证服务器证书时marker为“@cert-authority”，hostname为"*"匹配所有主机。
-当客户端用ssh -o HostKeyAlias=principal方式验证服务器时，principal即为要在known_hosts文件中查找的hostname字段。
+文件每行用空白间隔的字段为markers (optional), hostnames, keytype, base64-encoded key, comment。  
+
+验证服务器证书时marker为“@cert-authority”，hostname为"*"匹配所有主机。  
+
+当客户端用ssh -o HostKeyAlias=principal方式验证服务器时，principal即为要在known_hosts文件中查找的hostname字段。  
+
 ```
 echo "cert-authority * $(cat agent_key.pub)" >>~/.ssh/known_hosts
 ```
