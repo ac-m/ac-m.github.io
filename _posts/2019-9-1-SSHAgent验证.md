@@ -20,7 +20,7 @@ title: SSH Agent(USB Key)验证
 #用Forward Agent方式登录Server
 ssh -A user@server
 sudo ssh-keygen -t ed25519 -N "" -C "ed25519 server host key" -f /etc/ssh/ssh_host_ed25519_key
-ssh-keygen -Us agent_key.pub -I "servername ed25519 host certificate" -h /etc/ssh/ssh_host_ed25519_key.pub -V "+52w1d"
+sudo -E ssh-keygen -Us agent_key.pub -V "+52w1d" -I "servername ed25519 host certificate" -h /etc/ssh/ssh_host_ed25519_key.pub
 #得到ssh_host_ed25519_key-cert.pub
 ```
 第5行，生成私钥/etc/ssh/ssh_host_ed25519_key、公钥/etc/ssh/ssh_host_ed25519_key.pub  
