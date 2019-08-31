@@ -14,7 +14,7 @@ title: SSH Agent(USB Key)验证
 
 把SSH Agent(USB Key)公钥复制到服务器agent_key.pub  
 
-如在Windows上使用USBKey，设置Klopatra，打勾“设置|配置|GnuPG系统|Private Keys|Do not use the PIN cache when signing”。  
+如在Windows上使用USBKey，设置Klopatra，打勾“设置配置/GnuPG系统/Private Keys/Do not use the PIN cache when signing”。  
 
 ```bash
 #用Forward Agent方式登录Server
