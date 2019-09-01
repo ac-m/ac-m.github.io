@@ -101,5 +101,5 @@ echo "cert-authority,principals=user1 $(cat ca_key.pub)" >>~/.ssh/authorized_key
 当客户端用ssh -o HostKeyAlias=principal方式验证服务器时，principal即为要在known_hosts文件中查找的hostname字段。  
 
 ```
-echo "cert-authority * $(cat agent_key.pub)" >>~/.ssh/known_hosts
+echo "@cert-authority * $(cat agent_key.pub)" >>~/.ssh/known_hosts
 ```
