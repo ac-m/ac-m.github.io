@@ -10,20 +10,30 @@ title: SSH Agent(USB Key)验证
 用gpg --export-ssh-key fingerpring >> agent_key.pub得到SSH公钥文件。  
 
 
+
 ## 生成服务器主机证书  
 
-把SSH Agent(USB Key)公钥复制到服务器agent_key.pub  
+更新主机密钥  
+
+```
+ssh user@server
+ssh-keygen -t ed25519 -N "" -C "server_name 20190901 ed25519 host key" -f /etc/ssh/ssh_host_ed25519_key
+```
+生成私钥/etc/ssh/ssh_host_ed25519_key、公钥/etc/ssh/ssh_host_ed25519_key.pub  
+
+scp从服务器复制ssh_host_ed25519_key到客户端，签名后，scp复制回服务器，再用sudo复制到正确位置。  
 
 ```bash
-#用Forward Agent方式登录Server
-ssh -A user@server
-sudo ssh-keygen -t ed25519 -N "" -C "ed25519 server host key" -f /etc/ssh/ssh_host_ed25519_key
-sudo -E ssh-keygen -Us agent_key.pub -V "+52w1d" -I "servername ed25519 host certificate" -h /etc/ssh/ssh_host_ed25519_key.pub
-#得到ssh_host_ed25519_key-cert.pub
-```
-第5行，生成私钥/etc/ssh/ssh_host_ed25519_key、公钥/etc/ssh/ssh_host_ed25519_key.pub  
+cd tmp_dir
+scp user@server:/etc/ssh/ssh_host_ed25519_key .
 
-第6行，用客户端的SSH Agent(USB Key)私钥签名公钥ssh_host_ed25519_key.pub得到证书ssh_host_ed25519_key-cert.pub，  
+ssh-keygen -Us agent_key.pub -V "+52w1d" -I "servername 20190901 ed25519 host certificate" -h ssh_host_ed25519_key.pub
+#得到ssh_host_ed25519_key-cert.pub
+scp ssh_host_ed25519_key-cert.pub user@server:
+ssh user@server
+sudo cp ssh_host_ed25519_key-cert.pub /etc/ssh/
+```
+用客户端的SSH Agent(USB Key)私钥签名公钥ssh_host_ed25519_key.pub得到证书ssh_host_ed25519_key-cert.pub，  
 
 其中-h表示这是主机证书而非用户证书，  
 
