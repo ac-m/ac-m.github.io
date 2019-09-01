@@ -49,9 +49,16 @@ sudo cp ssh_host_ed25519_key-cert.pub /etc/ssh/
 HostKey /etc/ssh/ssh_host_ed25519_key
 HostCertificate /etc/ssh/ssh_host_ed25519_key-cert.pub
 
+
 #server for client, use certificate mode
-HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com
+
+#HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com
+#for client ubuntu18.04, server debian10 buster only
+
 #HostKeyAlgorithms ssh-ed25519
+#for client ubuntu18.04, server ubuntu18.04 only
+
+
 
 KexAlgorithms curve25519-sha256
 
