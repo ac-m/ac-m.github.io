@@ -46,10 +46,6 @@ sudo cp ssh_host_ed25519_key-cert.pub /etc/ssh/
 
 ## 设置服务器/etc/ssh/sshd_config
 ```bash
-HostKey /etc/ssh/ssh_host_ed25519_key
-HostCertificate /etc/ssh/ssh_host_ed25519_key-cert.pub
-
-
 #server for client, use certificate mode
 
 #HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com
@@ -58,7 +54,8 @@ HostCertificate /etc/ssh/ssh_host_ed25519_key-cert.pub
 #HostKeyAlgorithms ssh-ed25519
 #for client ubuntu18.04, server ubuntu18.04 only
 
-
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostCertificate /etc/ssh/ssh_host_ed25519_key-cert.pub
 
 KexAlgorithms curve25519-sha256
 
