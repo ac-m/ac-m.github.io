@@ -50,14 +50,15 @@ HostCertificate /etc/ssh/ssh_host_ed25519_key-cert.pub
 
 #server for client, use certificate mode
 HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com
+#HostKeyAlgorithms ssh-ed25519
 
 KexAlgorithms curve25519-sha256
 
 #client for server, use pubkey not certificate
 #PubkeyAcceptedKeyTypes ssh-ed25519-cert-v01@openssh.com
 PubkeyAcceptedKeyTypes ssh-ed25519
-
 AuthenticationMethods publickey
+
 PasswordAuthentication no
 ChallengeResponseAuthentication no
 ```
@@ -84,7 +85,7 @@ principals="user1,user2" 表示待认证客户端证书中允许的principals。
 
 from="pattern1,pattern2,pattern3" pattern可以是含'*'、'?'组成的ip地址、域名，限定IP、域名访问。  
 
-例子，
+principals方式例子，
 ```bash
 cert-authority,principals="user1,user2",from="*.abc.com,192.168.1.?,192.168.2.*,192.168.3.1" ssh-ed25519 base64-key this is comment
 cert-authority,principals=user1 ssh-ed25519 base64-key this is comment
