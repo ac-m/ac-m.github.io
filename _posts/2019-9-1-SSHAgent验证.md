@@ -30,6 +30,7 @@ scp user@server:/etc/ssh/ssh_host_ed25519_key.pub .
 ssh-keygen -Us agent_key.pub -V "+52w1d" -I "servername 20190901 ed25519 host certificate" -h ssh_host_ed25519_key.pub
 #得到ssh_host_ed25519_key-cert.pub
 scp ssh_host_ed25519_key-cert.pub user@server:
+scp agent_key.pub user@server:
 ssh user@server
 sudo cp ssh_host_ed25519_key-cert.pub /etc/ssh/
 ```
