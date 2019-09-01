@@ -25,7 +25,7 @@ scp从服务器复制ssh_host_ed25519_key到客户端，签名后，scp复制回
 
 ```bash
 cd tmp_dir
-scp user@server:/etc/ssh/ssh_host_ed25519_key .
+scp user@server:/etc/ssh/ssh_host_ed25519_key.pub .
 
 ssh-keygen -Us agent_key.pub -V "+52w1d" -I "servername 20190901 ed25519 host certificate" -h ssh_host_ed25519_key.pub
 #得到ssh_host_ed25519_key-cert.pub
