@@ -54,6 +54,8 @@ sudo cp ssh_host_ed25519_key-cert.pub /etc/ssh/
 #HostKeyAlgorithms ssh-ed25519
 #for client ubuntu18.04, server ubuntu18.04 only
 
+#--------------------------------------------------------
+
 HostKey /etc/ssh/ssh_host_ed25519_key
 HostCertificate /etc/ssh/ssh_host_ed25519_key-cert.pub
 
