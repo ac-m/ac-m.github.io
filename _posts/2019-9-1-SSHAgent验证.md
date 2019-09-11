@@ -17,6 +17,7 @@ title: SSH Agent(USB Key)验证
 
 ```
 ssh user@server
+#如安全server可用 ssh -A user@server登录
 sudo ssh-keygen -t ed25519 -N "" -C "server_name 20190901 ed25519 host key" -f /etc/ssh/ssh_host_ed25519_key
 ```
 生成私钥/etc/ssh/ssh_host_ed25519_key、公钥/etc/ssh/ssh_host_ed25519_key.pub  
@@ -29,6 +30,10 @@ scp user@server:/etc/ssh/ssh_host_ed25519_key.pub .
 
 ssh-keygen -Us agent_key.pub -n servername20190912 -I "servername 20190912" -h ssh_host_ed25519_key.pub
 #得到ssh_host_ed25519_key-cert.pub
+
+#如用ssh -A登录可用
+#sudo -E ssh-keygen -Us agent_key.pub -n servername20190912 -I "servername 20190912" -h /etc/ssh/ssh_host_ed25519_key.pub
+
 scp ssh_host_ed25519_key-cert.pub user@server:
 scp agent_key.pub user@server:
 ssh user@server
