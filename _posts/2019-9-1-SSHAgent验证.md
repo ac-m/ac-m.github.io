@@ -39,7 +39,9 @@ sudo cp ssh_host_ed25519_key-cert.pub /etc/ssh/
 
 其中-h表示这是主机证书而非用户证书。  
 
+
 其中-n表示principals指定主机名，以便客户端登录时用ssh -o HostKeyAlias=principal方式验证服务器，如弹出“是否添加未知主机？”即得知遭受中间人攻击。  
+
 一般在主机名后附加特定签名日期，构造出一个不同于之前签名时使用过的所有主机名，即使之前任何签名证书及主机密钥被盗，也不担心中间人伪造主机攻击。  
 
 
@@ -81,10 +83,6 @@ chmod go-rwx ~/.ssh/authorized_keys
 cat agent_key.pub >>~/.ssh/authorized_keys
 ```
 
-```bash
-echo "cert-authority,principals=user1 $(cat ca_key.pub)" >>~/.ssh/authorized_keys
-```
-
 authorized_keys文件每行格式为空格分割的字段：options(可选) keytype base64-key comment  
 
 keytype为ssh-ed25519;  
@@ -102,6 +100,11 @@ principals方式例子，
 cert-authority,principals="user1,user2",from="*.abc.com,192.168.1.?,192.168.2.*,192.168.3.1" ssh-ed25519 base64-key this is comment
 cert-authority,principals=user1 ssh-ed25519 base64-key this is comment
 ```
+
+```bash
+echo "cert-authority,principals=user1 $(cat ca_key.pub)" >>~/.ssh/authorized_keys
+```
+
 
 ## 设置客户端~/.ssh/known_hosts
 文件每行用空白间隔的字段为markers (optional), hostnames, keytype, base64-encoded key, comment。  
