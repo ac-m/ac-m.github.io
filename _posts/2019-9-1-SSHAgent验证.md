@@ -133,3 +133,9 @@ Host serverhost
   HostKeyAlias "servername20190912"
 ```
 每个server添加一段。
+
+如serverhost是动态ip地址，可以如下两种方式登录
+```
+ssh -o HostName=192.168.1.1 user@serverhost
+ssh -o HostKeyAlias=servername20190912 user@192.168.1.1
+```
