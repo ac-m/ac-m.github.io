@@ -5,124 +5,32 @@ title: SSH Agent(USB Key)验证
 
 ## 客户端准备SSH Agent(USB Key)公钥  
 
-用gpg -K列出私钥对应公钥指纹fingerpring。  
-
-用gpg --export-ssh-key fingerpring >> agent_key.pub得到SSH公钥文件。  
+用ssh-add -L看可否列出USB Key公钥。
 
 
+## 添加USB Key公钥到服务器
 
-## 生成服务器主机证书  
+ssh-copy-id user@server
 
-更新主机密钥  
-
-```
-ssh user@server
-#如安全server可用 ssh -A user@server登录
-sudo ssh-keygen -t ed25519 -N "" -C "server_name 20190901 ed25519 host key" -f /etc/ssh/ssh_host_ed25519_key
-```
-生成私钥/etc/ssh/ssh_host_ed25519_key、公钥/etc/ssh/ssh_host_ed25519_key.pub  
-
-scp从服务器复制ssh_host_ed25519_key到客户端，签名后，scp复制回服务器，再用sudo复制到正确位置。  
-
-```bash
-cd tmp_dir
-scp user@server:/etc/ssh/ssh_host_ed25519_key.pub .
-
-ssh-keygen -Us agent_key.pub -n servername20190912 -I "servername 20190912" -h ssh_host_ed25519_key.pub
-#得到ssh_host_ed25519_key-cert.pub
-
-#如用ssh -A登录可用
-#sudo -E ssh-keygen -Us agent_key.pub -n servername20190912 -I "servername 20190912" -h /etc/ssh/ssh_host_ed25519_key.pub
-
-scp ssh_host_ed25519_key-cert.pub user@server:
-scp agent_key.pub user@server:
-ssh user@server
-sudo cp ssh_host_ed25519_key-cert.pub /etc/ssh/
-```
-
-用客户端的SSH Agent(USB Key)私钥签名公钥ssh_host_ed25519_key.pub得到证书ssh_host_ed25519_key-cert.pub，  
-
-其中-h表示这是主机证书而非用户证书。  
-
-
-其中-n表示principals指定主机名，以便客户端登录时用ssh -o HostKeyAlias=principal方式验证服务器，如弹出“是否添加未知主机？”即得知遭受中间人攻击。  
-
-一般在主机名后附加特定签名日期，构造出一个不同于之前签名时使用过的所有主机名，即使之前任何签名证书及主机密钥被盗，也不担心中间人伪造主机攻击。  
-
+可测试ssh user@server不用输密码登录。
 
 
 
 ## 设置服务器/etc/ssh/sshd_config
 ```bash
-#server for client, use certificate mode
-
-#HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com
-#for client ubuntu18.04, server debian10 buster only
-
-#HostKeyAlgorithms ssh-ed25519
-#for client ubuntu18.04, server ubuntu18.04 only
-
-#--------------------------------------------------------
-
 HostKey /etc/ssh/ssh_host_ed25519_key
-HostCertificate /etc/ssh/ssh_host_ed25519_key-cert.pub
-
 KexAlgorithms curve25519-sha256
-
-#client for server, use pubkey not certificate
-#PubkeyAcceptedKeyTypes ssh-ed25519-cert-v01@openssh.com
-PubkeyAcceptedKeyTypes ssh-ed25519
 AuthenticationMethods publickey
-
 PasswordAuthentication no
 ChallengeResponseAuthentication no
 ```
 
-## 把SSH Agent(USB Key)公钥加入用户的授权密钥文件
-准备~/.ssh/authorized_keys文件
-```bash
-mkdir -p ~/.ssh
-chmod go-rwx ~/.ssh
-touch ~/.ssh/authorized_keys
-chmod go-rwx ~/.ssh/authorized_keys
-cat agent_key.pub >>~/.ssh/authorized_keys
-```
-
-authorized_keys文件每行格式为空格分割的字段：options(可选) keytype base64-key comment  
-
-keytype为ssh-ed25519;  
-
-options字段是以','分割的option，可以为以下：  
-
-cert-authority 表示base64-key为待认证客户端证书的允许CA公钥。  
-
-principals="user1,user2" 表示待认证客户端证书中允许的principals。即principals之一必须出现在证书principals中，即principals与证书principals交集必须非空，认证才通过。这里user1、user2是虚拟用户，可以不是server上用户。  
-
-from="pattern1,pattern2,pattern3" pattern可以是含'*'、'?'组成的ip地址、域名，限定IP、域名访问。  
-
-principals方式例子，
-```bash
-cert-authority,principals="user1,user2",from="*.abc.com,192.168.1.?,192.168.2.*,192.168.3.1" ssh-ed25519 base64-key this is comment
-cert-authority,principals=user1 ssh-ed25519 base64-key this is comment
-```
-
-```bash
-echo "cert-authority,principals=user1 $(cat ca_key.pub)" >>~/.ssh/authorized_keys
-```
 
 
 ## 设置客户端~/.ssh/known_hosts
 文件每行用空白间隔的字段为markers (optional), hostnames, keytype, base64-encoded key, comment。  
 
-验证指定服务器证书时marker为“@cert-authority”，hostname为之前签名时指定的principal。  
-
-当客户端用ssh -o HostKeyAlias=principal方式验证服务器时，principal 即为要在known_hosts文件中查找的hostname字段。  
-
-```
-echo "@cert-authority servername20190912 $(cat agent_key.pub)" >>~/.ssh/known_hosts
-```
-注意known_hosts文件中servername20190912不加引号。  
-每个server添加一行。
+如hostnames动态变化(如拨号上网)，不是域名或固定ip，可用*替代。
 
 
 ## 设置客户端~/.ssh/config
@@ -130,12 +38,5 @@ echo "@cert-authority servername20190912 $(cat agent_key.pub)" >>~/.ssh/known_ho
 ```
 Host serverhost
   User username
-  HostKeyAlias "servername20190912"
 ```
 每个server添加一段。
-
-如serverhost是动态ip地址，可以如下两种方式登录
-```
-ssh -o HostName=192.168.1.1 user@serverhost
-ssh -o HostKeyAlias=servername20190912 user@192.168.1.1
-```
