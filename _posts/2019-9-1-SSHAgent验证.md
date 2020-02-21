@@ -22,7 +22,6 @@ HostKey /etc/ssh/ssh_host_ed25519_key
 KexAlgorithms curve25519-sha256
 AuthenticationMethods publickey
 PasswordAuthentication no
-ChallengeResponseAuthentication no
 ```
 
 
