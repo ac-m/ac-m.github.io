@@ -18,10 +18,12 @@ ssh-copy-id user@server
 
 ## 设置服务器/etc/ssh/sshd_config
 ```bash
+#------------------------------------
 HostKey /etc/ssh/ssh_host_ed25519_key
 KexAlgorithms curve25519-sha256
 AuthenticationMethods publickey
 PasswordAuthentication no
+#------------------------------------
 ```
 
 
